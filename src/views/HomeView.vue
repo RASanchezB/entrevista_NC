@@ -133,7 +133,7 @@ export default {
 
 <template>
   <div class="background">
-    <meta http-equiv="refresh" content="180" >
+    <meta http-equiv="refresh" content="100" >
     <HeaderItem/>
     <div class="container">
       <div class="column">
