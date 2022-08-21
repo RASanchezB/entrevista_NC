@@ -4,7 +4,7 @@
   --vt-c-white-soft: #f8f8f8;
   --vt-c-white-mute: #f2f2f2;
 
-  --vt-c-black: #181818;
+  --vt-c-black: #ffffff;
   --vt-c-black-soft: #222222;
   --vt-c-black-mute: #282828;
 
@@ -55,11 +55,10 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  position: relative;
   font-weight: normal;
 }
 
-body {
+/* body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
@@ -71,4 +70,4 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
