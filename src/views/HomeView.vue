@@ -17,6 +17,7 @@ export default {
       username: 'sarah',
       password: 'connor',
       token: "",
+      temp: []
 
     }
   },
@@ -50,7 +51,17 @@ export default {
 
   },
   computed:{
-    
+    isDisabled() {
+      let ssnumber = document.getElementById('ssn')?.value || ''
+      this.$data.temp = this.$data.listado.data?.map((res)=>{
+        return res.ssn
+      })
+      if(this.$data.temp?.includes(ssnumber)){
+        return true;
+      }else{
+        return false;
+      }
+    },
   },
   methods:{
     updateTable(){
@@ -112,6 +123,7 @@ export default {
       
     },
     
+    
 
   }
 
@@ -133,10 +145,10 @@ export default {
           <label for="address">Address:</label><br>
           <input type="text" id="address" name="address" required><br>
           <label for="ssn">SSN: (###-##-####)</label><br>
-          <input type="text" id="ssn" name="ssn" required pattern="^(?!(000|666|9))\d{3}-(?!00)\d{2}-(?!0000)\d{4}$" ><br>
+          <input type="text" id="ssn" name="ssn" required pattern="^(?!(000|666|9))\d{3}-(?!00)\d{2}-(?!0000)\d{4}$"  ><br>
           <div class="column">
             <input type="submit" value="Reset" @click="resetButton()">
-            <input type="submit" value="Submit" @click="submitButton()">
+            <input type="submit" value="Submit" @click="submitButton()" :disabled="isDisabled">
           </div>
         </form>
       </div>
