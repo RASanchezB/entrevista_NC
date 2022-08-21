@@ -21,8 +21,6 @@ export default {
     }
   },
   async mounted(){
-    
-    console.log()
     //Se consigue el token
     try{
       await axios.post(this.$data.authUrl, {     
@@ -30,33 +28,32 @@ export default {
           password: this.$data.password     
       })
       .then(response => (
-        console.log(this.$data.token= (response.data.token))
+        this.$data.token= (response.data.token)
       ))
     }catch(error){
       console.log(error)
     }
 
 
-    console.log("El token es: "+this.$data.token)
     try{
       await axios.get(this.$data.url, {
         headers:{
           Authorization: `Bearer ${this.$data.token}` 
         }
       }).then(response =>{
-        console.log(response)
         this.$data.listado = response
       })
     }catch(error){
       console.log(error)
     }
-    console.log("Salio")
     this.updateTable()
 
   },
+  computed:{
+    
+  },
   methods:{
     updateTable(){
-      console.log("Hola")
       for(var i = 0; i < this.$data.listado.data.length; i++){
         // Nueva linea
         var newRow = table.insertRow(table.length);
@@ -84,6 +81,7 @@ export default {
       let addr = document.getElementById('address').value
       let ssnumber = document.getElementById('ssn').value
 
+      
       // Llenar la tabla sin update
       var newRow = table.insertRow(table.length);
       var cell1 = newRow.insertCell(0);
@@ -94,7 +92,6 @@ export default {
       cell3.innerHTML = addr
       var cell4 = newRow.insertCell(3);     
       cell4.innerHTML = ssnumber;
-
       //subir a api
       try{
         await axios.post(this.$data.url, {
@@ -108,10 +105,10 @@ export default {
             }
           }).then(response =>{
             console.log(response);
-        })
-      }catch(error){
-        console.log(error)
-      }
+          })
+        }catch(error){
+          console.log(error)
+        }
       
     },
     
@@ -124,6 +121,7 @@ export default {
 
 <template>
   <div class="background">
+    <meta http-equiv="refresh" content="180" >
     <HeaderItem/>
     <div class="container">
       <div class="column">
@@ -135,7 +133,7 @@ export default {
           <label for="address">Address:</label><br>
           <input type="text" id="address" name="address" required><br>
           <label for="ssn">SSN: (###-##-####)</label><br>
-          <input type="text" id="ssn" name="ssn" required pattern="^(?!(000|666|9))\d{3}-(?!00)\d{2}-(?!0000)\d{4}$"><br>
+          <input type="text" id="ssn" name="ssn" required pattern="^(?!(000|666|9))\d{3}-(?!00)\d{2}-(?!0000)\d{4}$" ><br>
           <div class="column">
             <input type="submit" value="Reset" @click="resetButton()">
             <input type="submit" value="Submit" @click="submitButton()">
